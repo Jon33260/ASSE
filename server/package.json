@@ -1,0 +1,32 @@
+{
+  "name": "@template_fullstack/server",
+  "main": "dist/src/main.js",
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "dev": "tsx watch --clear-screen=false ./src/main",
+    "db:migrate": "tsx ./bin/migrate",
+    "db:seed": "tsx ./bin/seed",
+    "build": "tsx ./bin/migrate && tsc ./src/main --outDir ../dist --esModuleInterop",
+    "start": "node ../dist/src/main",
+    "test": "mocha --require ts-node/register \"tests/**/*.spec.ts\""
+  },
+  "dependencies": {
+    "argon2": "^0.41.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^2.2.5"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/mocha": "^10.0.10",
+    "mocha": "^11.1.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}
