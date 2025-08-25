@@ -3,3 +3,17 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.fixed-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: aqua;
+}
+
+main {
+  margin-top: 10rem; /* hauteur approximative de la navbar */
+  padding: 1rem;
+}
