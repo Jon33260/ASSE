@@ -1,13 +1,16 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
+import NavBar from "./components/NavBar";
 
-function App() {
+export default function App() {
   return (
     <>
-      <h1>NeoOrigin404 - Monorepo</h1>
-      <Outlet />
+      <div className="fixed-navbar">
+        <NavBar />
+      </div>
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 }
-
-export default App;

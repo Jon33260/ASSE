@@ -1,0 +1,43 @@
+.formulaire-inscription {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formulaire-inscription h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.formulaire-inscription label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.formulaire-inscription input {
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border-radius: 0.3rem;
+  border: 1px solid #ccc;
+}
+
+.formulaire-inscription button {
+  padding: 0.7rem;
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.formulaire-inscription button:hover {
+  background-color: darkblue;
+}

@@ -8,12 +8,22 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Import the main app component
 import App from "./App";
 
+// Import des pages
+import Accueil from "./pages/Accueil";
+import Profil from "./pages/Profil";
+import PageDeConnexion from "./pages/PageDeConnexion";
+
 /* ************************************************************************* */
 
 const router = createBrowserRouter([
   {
-    element: <App />,
-    path: "/",
+    element: <App />, // parent, pas de path ici
+    children: [
+      { path: "/", element: <Accueil /> }, // page par défaut
+      { path: "accueil", element: <Accueil /> }, // accessible via /accueil
+      { path: "profil", element: <Profil /> },
+      { path: "connexion", element: <PageDeConnexion /> },
+    ],
   },
 ]);
 
