@@ -9,8 +9,9 @@ const router = express.Router();
 // User routes
 import userActions from "./modules/userActions";
 import form from "./middlewares/form";
+import auth from "./middlewares/auth";
 
-router.get("/api/users", userActions.browse);
+router.get("/api/users", auth.checkIfAdmin, userActions.browse);
 router.get("/api/users/:id", userActions.read);
 router.put("/api/users/:id", userActions.edit);
 router.post("/api/users", form.validate, userActions.add);

@@ -4,6 +4,12 @@ export type {};
 declare global {
   namespace Express {
     export interface Request {
+      user: {
+        id: number;
+        username: string;
+        email: string;
+        is_admin: boolean;
+      };
       /* ************************************************************************* */
       // Add your custom properties here, for example:
       //
