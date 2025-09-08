@@ -55,16 +55,7 @@ export default function FormulaireInscription({
           required
         />
       </label>
-      <label>
-        Confirmer le mot de passe
-        <input
-          type="password"
-          name="confirmerMotDePasse"
-          value={user.confirmerMotDePasse}
-          onChange={handleChangeForm}
-          required
-        />
-      </label>
+
       <button type="submit">S'inscrire</button>
     </form>
   );
