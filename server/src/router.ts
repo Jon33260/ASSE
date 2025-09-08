@@ -24,4 +24,18 @@ router.put("/api/posts/:id", postActions.edit);
 router.post("/api/posts", postActions.add);
 router.delete("/api/posts/:id", postActions.destroy);
 
+// Supporter Photo routes
+import supporterPhotoActions from "./modules/supporterPhotos/supporterPhotosActions";
+import upload from "./middlewares/upload";
+
+router.get("/api/supporter-photos", supporterPhotoActions.browse); // toutes les photos
+router.get("/api/supporter-photos/:id", supporterPhotoActions.read); // photo par id
+router.put("/api/supporter-photos/:id", supporterPhotoActions.edit); // modifier
+router.post(
+  "/api/supporter-photos",
+  upload.uploadFile,
+  supporterPhotoActions.add,
+); // ajouter
+router.delete("/api/supporter-photos/:id", supporterPhotoActions.destroy); // supprimer
+
 export default router;

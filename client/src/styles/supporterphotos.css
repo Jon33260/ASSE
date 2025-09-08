@@ -1,0 +1,15 @@
+.supporter-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.supporter-item {
+  width: 200px;
+  display: block;
+}
+
+.supporter-item img {
+  width: 100%;
+  border-radius: 8px;
+}

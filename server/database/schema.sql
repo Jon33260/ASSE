@@ -50,7 +50,7 @@ CREATE TABLE supporter_photo (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     title VARCHAR(50) NOT NULL,
     description VARCHAR(255) DEFAULT NULL,
-    picture TEXT NOT NULL,
+    picture VARCHAR(255) DEFAULT "default.jpg",
     category_id INT NOT NULL,
     user_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -59,6 +59,6 @@ CREATE TABLE supporter_photo (
 );
 
 INSERT INTO supporter_photo(title, description, picture, category_id, user_id, created_at) VALUES
-('Victoire contre Lyon', 'Photo du Kop Nord après le but', 'kop_nord_victoire.jpg', 1, 2, '2025-08-20 21:00:00'),
+('Victoire contre Lyon', 'Photo du Kop Nord après le but', 'kopnord.jpg', 1, 2, '2025-08-20 21:00:00'),
 ('Tifo incroyable', 'Super tifo en tribune', 'tifo_incredible.jpg', 2, 1, '2025-08-22 19:30:00'),
 ('Chants des supporters', 'Fans chantant ensemble', 'chants_stade.jpg', 3, 3, '2025-08-21 20:45:00');
