@@ -7,7 +7,7 @@ type User = {
   Nom: string;
   Prenom: string;
   Email: string;
-  Password: string;
+  hashed_password: string;
   is_admin: boolean;
 };
 
@@ -17,8 +17,8 @@ class UsersRepository {
   }
   async create(user: Omit<User, "id">) {
     const [result] = await databaseClient.query<Result>(
-      "INSERT INTO users (Nom, Prenom, Email, Password, is_admin) VALUES (?, ?, ?, ?, ?)",
-      [user.Nom, user.Prenom, user.Email, user.Password, user.is_admin],
+      "INSERT INTO users (Nom, Prenom, Email, hashed_password, is_admin) VALUES (?, ?, ?, ?, ?)",
+      [user.Nom, user.Prenom, user.Email, user.hashed_password, user.is_admin],
     );
 
     return result.insertId;
@@ -29,17 +29,10 @@ class UsersRepository {
     return rows as User[];
   }
 
-  async update(user: User) {
+  async update(user: Omit<User, "email" | "hashed_password" | "is_admin">) {
     const [result] = await databaseClient.query<Result>(
-      "UPDATE users SET Nom = ?, Prenom = ?, Email = ?, Password = ?, is_admin = ? WHERE id = ?",
-      [
-        user.Nom,
-        user.Prenom,
-        user.Email,
-        user.Password,
-        user.is_admin,
-        user.id,
-      ],
+      "UPDATE users SET Nom = ?, Prenom = ?, Email = ?, WHERE id = ?",
+      [user.Nom, user.Prenom, user.Email, user.id],
     );
     return result.affectedRows;
   }

@@ -4,6 +4,7 @@ CREATE TABLE users (
     Nom VARCHAR(255) NOT NULL,
     Prenom VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL UNIQUE,
+    hashed_password VARCHAR(255) NOT NULL,
     Password VARCHAR(255) NOT NULL,
     is_admin BOOLEAN DEFAULT FALSE
 );
