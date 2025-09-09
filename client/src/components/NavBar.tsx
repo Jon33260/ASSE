@@ -53,6 +53,15 @@ export default function NavBar() {
             Connexion
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to="/auth"
+            className="nav-item"
+            onClick={() => setShowLinks(false)}
+          >
+            Se Connecter
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );
