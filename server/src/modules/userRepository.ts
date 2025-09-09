@@ -50,6 +50,15 @@ class UsersRepository {
     );
     return result.affectedRows;
   }
+
+  async readByEmailWithPassword(email: string) {
+    const [rows] = await databaseClient.query<Rows>(
+      "SELECT * FROM users WHERE Email = ?",
+      [email],
+    );
+
+    return rows[0];
+  }
 }
 
 export default new UsersRepository();
