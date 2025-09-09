@@ -5,9 +5,11 @@ declare global {
   namespace Express {
     export interface Request {
       user: {
+        role: string;
         id: number;
-        username: string;
-        email: string;
+        Nom: string;
+        Prenom: string;
+        Email: string;
         is_admin: boolean;
       };
       /* ************************************************************************* */

@@ -11,7 +11,7 @@ import userActions from "./modules/userActions";
 import form from "./middlewares/form";
 import auth from "./middlewares/auth";
 
-router.get("/api/users", userActions.browse);
+router.get("/api/users", auth.verify, auth.checkIfAdmin, userActions.browse);
 router.get("/api/users/:id", userActions.read);
 router.put("/api/users/:id", userActions.edit);
 
