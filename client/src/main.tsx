@@ -12,6 +12,7 @@ import App from "./App";
 import Accueil from "./pages/Accueil";
 import Profil from "./pages/Profil";
 import PageDeConnexion from "./pages/PageDeConnexion";
+import Auth from "./pages/auth/Auth";
 
 /* ************************************************************************* */
 
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: "accueil", element: <Accueil /> }, // accessible via /accueil
       { path: "profil", element: <Profil /> },
       { path: "connexion", element: <PageDeConnexion /> },
+      { path: "auth", element: <Auth /> },
     ],
   },
 ]);

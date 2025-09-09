@@ -1,5 +1,6 @@
 import type { RequestHandler } from "express";
 import argon2 from "argon2";
+import jwt from "jsonwebtoken";
 
 import userRepository from "../modules/userRepository";
 
@@ -48,6 +49,29 @@ const login: RequestHandler = async (req, res, next) => {
     if (!verified) {
       res.sendStatus(422); // renvoi une erreur si le mot de passe n'est pas bon
     } else {
+      const payload = {
+        // ce qu'on stock à l'intérieur du token
+        id: users.id,
+        Nom: users.Nom,
+        Prenom: users.Prenom,
+        Email: users.Email,
+        is_admin: users.is_admin,
+      };
+
+      if (!process.env.APP_SECRET) {
+        throw new Error("Vous n'avez pas configuré votre APP_SECRET");
+      }
+
+      const token = await jwt.sign(payload, process.env.APP_SECRET, {
+        expiresIn: "1y", // date d'expiration du token
+      }); // création du token
+
+      // token prêt à être envoyé au client
+
+      console.info(token);
+
+      res.cookie("auth", token); //apparait dans les cookies sur postman le nom "auth" on l'appelle comme on veut
+
       res.send("utilisateur connecté");
     }
 
