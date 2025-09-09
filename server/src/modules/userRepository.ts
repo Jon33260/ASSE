@@ -2,7 +2,7 @@ import databaseClient from "../../database/client";
 
 import type { Result, Rows } from "../../database/client";
 
-type User = {
+type Users = {
   id: number;
   Nom: string;
   Prenom: string;
@@ -15,10 +15,16 @@ class UsersRepository {
   read(userId: number) {
     throw new Error("Method not implemented.");
   }
-  async create(user: Omit<User, "id">) {
+  async create(users: Users) {
     const [result] = await databaseClient.query<Result>(
       "INSERT INTO users (Nom, Prenom, Email, hashed_password, is_admin) VALUES (?, ?, ?, ?, ?)",
-      [user.Nom, user.Prenom, user.Email, user.hashed_password, user.is_admin],
+      [
+        users.Nom,
+        users.Prenom,
+        users.Email,
+        users.hashed_password,
+        users.is_admin,
+      ],
     );
 
     return result.insertId;
@@ -26,12 +32,12 @@ class UsersRepository {
 
   async readAll() {
     const [rows] = await databaseClient.query<Rows>("SELECT * FROM users");
-    return rows as User[];
+    return rows as Users[];
   }
 
-  async update(user: Omit<User, "email" | "hashed_password" | "is_admin">) {
+  async update(user: Omit<Users, "email" | "hashed_password" | "is_admin">) {
     const [result] = await databaseClient.query<Result>(
-      "UPDATE users SET Nom = ?, Prenom = ?, Email = ?, WHERE id = ?",
+      "UPDATE users SET Nom = ?, Prenom = ?, Email = ? WHERE id = ?",
       [user.Nom, user.Prenom, user.Email, user.id],
     );
     return result.affectedRows;

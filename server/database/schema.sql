@@ -5,11 +5,10 @@ CREATE TABLE users (
     Prenom VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL UNIQUE,
     hashed_password VARCHAR(255) NOT NULL,
-    Password VARCHAR(255) NOT NULL,
     is_admin BOOLEAN DEFAULT FALSE
 );
 
-INSERT INTO users (Nom, Prenom, Email, Password, is_admin) 
+INSERT INTO users (Nom, Prenom, Email, hashed_password, is_admin) 
 VALUES 
 ('Admin', 'Toto', 'test@test.fr', 'coucou', TRUE),
 ('Jean', 'Dupont', 'jean@gmail.com', 'toto', FALSE),

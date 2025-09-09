@@ -20,12 +20,13 @@ const formSchema = Joi.object({
     "string.email": "Veuillez entrer une adresse mail valide",
     "any.required": "Email requis",
   }),
-  Password: Joi.string().pattern(PASSWORD_REGEX).required().messages({
+  password: Joi.string().pattern(PASSWORD_REGEX).required().messages({
     "string.pattern.base":
       "Le mot de passe doit contenir au moins une majuscule, minuscule, chiffre et caractère spécial",
     "string.min": "Le mot de passe doit contenir 8 caractères minimum",
     "any.required": "Mot de passe requis",
   }),
+  is_admin: Joi.boolean().optional(),
 });
 
 const validate: RequestHandler = (req, res, next) => {

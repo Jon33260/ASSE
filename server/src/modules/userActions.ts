@@ -5,7 +5,7 @@ import userRepository from "./userRepository";
 const browse: RequestHandler = async (req, res, next) => {
   try {
     const users = await userRepository.readAll();
-    res.status(200).json(users);
+    res.json(users);
   } catch (error) {
     next(error);
   }
@@ -50,16 +50,12 @@ const edit: RequestHandler = async (req, res, next) => {
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const user = {
-      Nom: req.body.Nom,
-      Prenom: req.body.Prenom,
-      Email: req.body.Email,
-      hashed_password: req.body.hashed_password,
-      is_admin: req.body.is_admin,
-    };
+    console.info("depuis add", req.body);
+    const insertId = await userRepository.create(req.body);
 
-    const insertId = await userRepository.create(user);
-    res.status(201).json({ insertId });
+    if (insertId) {
+      res.sendStatus(200);
+    }
   } catch (error) {
     next(error);
   }
