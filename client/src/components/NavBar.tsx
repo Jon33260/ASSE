@@ -62,6 +62,15 @@ export default function NavBar() {
             Se Connecter
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to="/members"
+            className="nav-item"
+            onClick={() => setShowLinks(false)}
+          >
+            Membres
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

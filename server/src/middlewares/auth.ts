@@ -11,15 +11,6 @@ const hashingOptions = {
   parallelism: 1, // nombre de coeurs utilisés pour le hachage
 };
 
-const checkIfAdmin: RequestHandler = (req, res, next) => {
-  if (!req.user || !req.user.is_admin) {
-    res.status(403).json({ message: "Accès refusé" });
-    return;
-  }
-
-  next();
-};
-
 const hachPassword: RequestHandler = async (req, res, next) => {
   try {
     const { password } = req.body;
@@ -70,7 +61,13 @@ const login: RequestHandler = async (req, res, next) => {
 
       console.info(token);
 
-      res.cookie("auth", token); //apparait dans les cookies sur postman le nom "auth" on l'appelle comme on veut
+      res.cookie("auth", token).json({
+        message: "Connexion réussie",
+        is_admin: payload.is_admin,
+        user_id: payload.id,
+        Nom: payload.Nom,
+        Prenom: payload.Prenom,
+      }); //apparait dans les cookies sur postman le nom "auth" on l'appelle comme on veut
 
       res.send("utilisateur connecté");
     }
@@ -81,4 +78,47 @@ const login: RequestHandler = async (req, res, next) => {
   } catch (error) {}
 };
 
-export default { checkIfAdmin, hachPassword, login };
+const verify: RequestHandler = async (req, res, next) => {
+  if (!process.env.APP_SECRET) {
+    // si pas de process.env.APP_SECRET pas de try et de catch
+    throw new Error("Vous n'avez pas configuré votre APP_SECRET");
+  }
+  try {
+    // récupérer le token qui est à l'intérieur des cookies
+    const { auth } = req.cookies;
+
+    // si il y a pas de cookie on déclenche une erreur ..... auth = nom du cookie
+    if (!auth) {
+      res.sendStatus(403); // on vérifie si il y a un token
+    }
+
+    // on stock la vérification du token dans une variable .... verifie le token JWT qu'il y a à l'intérieur
+    const result = await jwt.verify(auth, process.env.APP_SECRET);
+
+    // si tout se passe bien next()
+
+    if (typeof result !== "object") {
+      throw new Error("Le token n'est pas au bon format");
+    }
+
+    req.user = {
+      id: result.id,
+      Email: result.Email,
+      is_admin: result.is_admin,
+    };
+
+    next();
+  } catch (error) {
+    next(error); // si erreur on la transmet au middleware d'erreur
+  }
+};
+
+const checkIfAdmin: RequestHandler = async (req, res, next) => {
+  if (!req.user.is_admin) {
+    res.status(403).json({ message: "Accès refusé" });
+  }
+
+  next();
+};
+
+export default { checkIfAdmin, hachPassword, login, verify };

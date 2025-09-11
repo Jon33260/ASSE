@@ -6,8 +6,7 @@ declare global {
     export interface Request {
       user: {
         id: number;
-        username: string;
-        email: string;
+        Email: string;
         is_admin: boolean;
       };
       /* ************************************************************************* */

@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 /* ************************************************************************* */
 
+import { getMembers } from "./services/requests";
 // Import the main app component
 import App from "./App";
 
@@ -13,6 +14,8 @@ import Accueil from "./pages/Accueil";
 import Profil from "./pages/Profil";
 import PageDeConnexion from "./pages/PageDeConnexion";
 import Auth from "./pages/auth/Auth";
+import Members from "./pages/members/members";
+import PageErreur from "./pages/members/PageErreur";
 
 /* ************************************************************************* */
 
@@ -25,6 +28,12 @@ const router = createBrowserRouter([
       { path: "profil", element: <Profil /> },
       { path: "connexion", element: <PageDeConnexion /> },
       { path: "auth", element: <Auth /> },
+      {
+        path: "/members",
+        element: <Members />,
+        loader: getMembers,
+        errorElement: <PageErreur />,
+      }, // accessible via /members
     ],
   },
 ]);
