@@ -7,12 +7,14 @@ CREATE TABLE users (
     hashed_password VARCHAR(255) NOT NULL,
     is_admin BOOLEAN DEFAULT FALSE
 );
-
+-- MP : Agence@33
 INSERT INTO users (Nom, Prenom, Email, hashed_password, is_admin) 
 VALUES 
-('Admin', 'Toto', 'test@test.fr', 'coucou', TRUE),
+('Admin', 'Toto', 'test@test.fr', 'coucou', FALSE),
 ('Jean', 'Dupont', 'jean@gmail.com', 'toto', FALSE),
-('Marie', 'Durand', 'marie@gmail.com', '1234', FALSE);
+('Marie', 'Durand', 'marie@gmail.com', '1234', FALSE),
+('Paul', 'Martin', 'paul@gmail.com', '$argon2id$v=19$m=19456,t=2,p=1$4K6rcqzXtfpsDyEWzDTc8w$D4eDLfhkGRGOvJPGdZc3dk6jP0u3Zu57yIxGWgDO2R4', FALSE),
+('Alice', 'Leroy', 'alice@gmail.com', '$argon2id$v=19$m=19456,t=2,p=1$4K6rcqzXtfpsDyEWzDTc8w$D4eDLfhkGRGOvJPGdZc3dk6jP0u3Zu57yIxGWgDO2R4', TRUE);
 
 -- Table des catégories pour les photos supporters
 CREATE TABLE category (
